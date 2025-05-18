@@ -58,6 +58,7 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            text-decoration: none;
         }
         
         .cta-button:hover {
