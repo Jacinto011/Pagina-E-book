@@ -259,6 +259,209 @@
             </div>
         </div>
     </section>
+    <!-- Modal Structure -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Processo de Compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Page 1: Personal Data -->
+                <div class="modal-body page" id="page1">
+                    <form id="paymentForm">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Apelido</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Contacto</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Page 2: Questions -->
+                <div class="modal-body page" id="page2" style="display:none;">
+                    <div class="mb-3">
+                        <label for="purpose" class="form-label">Para que fim pretende adquirir o livro?</label>
+                        <select class="form-select" id="purpose" required>
+                            <option value="" selected disabled>Selecione uma opção</option>
+                            <option value="leitura">Somente para leitura</option>
+                            <option value="tecnicas">Para aprimorar minhas técnicas de venda</option>
+                            <option value="liberdade">Para alcançar a minha liberdade financeira</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="delivery" class="form-label">Onde pretende receber o ebook?</label>
+                        <select class="form-select" id="delivery" required>
+                            <option value="" selected disabled>Selecione uma opção</option>
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Page 3: Payment Instructions -->
+                <div class="modal-body page" id="page3" style="display:none;">
+                    <h6 class="mb-3">Instruções de Pagamento:</h6>
+                    <ol class="steps-list">
+                        <li class="mb-2">Enviar o valor de <strong>350 MTS</strong> para um destes números: <strong>86
+                                3444 447</strong> ou <strong>86 4005 964</strong></li>
+                        <li class="mb-2">Enviar uma foto com a confirmação do pagamento via WhatsApp para o mesmo número
+                        </li>
+                        <li>Você receberá o ebook via email ou WhatsApp, conforme sua escolha</li>
+                    </ol>
+                </div>
+
+                <div class="modal-footer">
+                    <!-- Page 1 Footer -->
+                    <div class="footer-buttons" id="footer1">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="nextPage(1)">Seguinte</button>
+                    </div>
+
+                    <!-- Page 2 Footer -->
+                    <div class="footer-buttons" id="footer2" style="display:none;">
+                        <button type="button" class="btn btn-secondary" onclick="prevPage(2)">Anterior</button>
+                        <button type="button" class="btn btn-primary" onclick="nextPage(2)">Seguinte</button>
+                    </div>
+
+                    <!-- Page 3 Footer -->
+                    <div class="footer-buttons" id="footer3" style="display:none;">
+                        <button type="button" class="btn btn-secondary" onclick="prevPage(3)">Anterior</button>
+                        <button type="button" class="btn btn-success" onclick="submitPayment()">Está bem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .steps-list {
+            padding-left: 20px;
+        }
+
+        .steps-list li {
+            margin-bottom: 10px;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #eee;
+            justify-content: space-between;
+        }
+
+        .page {
+            min-height: 300px;
+        }
+
+        .footer-buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+
+    <script>
+        let currentPage = 1;
+
+        // Function to change pages
+        function changePage(newPage) {
+            // Hide all pages and footers
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            document.querySelectorAll('.footer-buttons').forEach(footer => {
+                footer.style.display = 'none';
+            });
+
+            // Show selected page and footer
+            document.getElementById(`page${newPage}`).style.display = 'block';
+            document.getElementById(`footer${newPage}`).style.display = 'flex';
+            currentPage = newPage;
+        }
+
+        // Next page function with validation
+        function nextPage(pageNum) {
+            if (pageNum === 1) {
+                // Validate personal data form
+                const form = document.getElementById('paymentForm');
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+            }
+            else if (pageNum === 2) {
+                // Validate questions
+                if (!document.getElementById('purpose').value || !document.getElementById('delivery').value) {
+                    alert('Por favor responda a todas as perguntas');
+                    return;
+                }
+            }
+
+            changePage(pageNum + 1);
+        }
+
+        // Previous page function
+        function prevPage(pageNum) {
+            changePage(pageNum - 1);
+        }
+
+        // Submit payment function
+        function submitPayment() {
+            // Get all form values
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                purpose: document.getElementById('purpose').value,
+                delivery: document.getElementById('delivery').value
+            };
+
+            // Here you would typically send this data to your server
+            console.log('Form data:', formData);
+
+            // Close the modal
+            var paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+            paymentModal.hide();
+
+            // Show success message
+            alert('Obrigado por sua compra! Por favor complete o pagamento seguindo as instruções.');
+
+            // Reset form for next use
+            document.getElementById('paymentForm').reset();
+            document.getElementById('purpose').value = '';
+            document.getElementById('delivery').value = '';
+            changePage(1);
+        }
+
+        // Add click event to your "Comprar Agora" button
+        document.querySelector('.cta-button').addEventListener('click', function (e) {
+            e.preventDefault();
+            var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            paymentModal.show();
+            changePage(1);
+        });
+    </script>
 
     <!-- FAQ Section -->
     <section class="py-5 bg-light">
