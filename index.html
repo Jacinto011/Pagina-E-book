@@ -427,7 +427,6 @@
         }
     </style>
 
-    <!-- Script -->
     <script>
         let currentPage = 1;
 
@@ -504,28 +503,30 @@
 
             console.log('Form data:', formData);
 
-            // Aqui você deve colocar a URL da sua API Google Sheets (endpoint do Apps Script, por exemplo)
-            const apiUrl = "https://script.google.com/macros/s/AKfycbyzycNtY7s6vl0OB4c-WAg7rozzL3oKiCUVMQIs1km1GjEJ4xKZxO-Pd11ZscUnNRWb/exec";
+            const apiUrl = "https://script.google.com/macros/s/AKfycbxpTuR4nyAJMBb7OTIQk-PkPCRZhVulbJUwfo5RQ-_wwWdkVNYbHAOKBcCOpqyONV6mVg/exec";
 
             try {
+                // Use URLSearchParams porque Google Apps Script espera application/x-www-form-urlencoded
+                const urlEncodedData = new URLSearchParams(formData);
+
                 const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/x-www-form-urlencoded"
                     },
-                    body: JSON.stringify(formData)
+                    body: urlEncodedData
                 });
 
                 if (!response.ok) throw new Error('Erro ao enviar dados.');
 
                 const result = await response.json();
 
-                // Fechar modal após envio
+                // Fecha modal
                 bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
 
                 alert('Aguardando pela sua compra! Por favor complete o pagamento seguindo as instruções. Boa leitura!');
 
-                // Resetar formulário e voltar para página 1
+                // Resetar formulário e voltar à página inicial
                 document.getElementById('paymentForm').reset();
                 document.getElementById('purpose').value = '';
                 document.getElementById('delivery').value = '';
@@ -539,13 +540,31 @@
             }
         }
 
-        // Abertura do modal
+        // NOVO: Chamar dados via GET e exibir no console
+        async function fetchPayments() {
+            const apiUrl = "https://script.google.com/macros/s/AKfycbxpTuR4nyAJMBb7OTIQk-PkPCRZhVulbJUwfo5RQ-_wwWdkVNYbHAOKBcCOpqyONV6mVg/exec";
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                console.log("Pagamentos recebidos:", data);
+            } catch (error) {
+                console.error("Erro ao buscar dados:", error);
+            }
+        }
+
+        // Exemplo: Chamar os dados assim que a página carregar
+        document.addEventListener("DOMContentLoaded", fetchPayments);
+
+        // Abrir modal
         document.querySelector('.cta-button')?.addEventListener('click', function (e) {
             e.preventDefault();
             new bootstrap.Modal(document.getElementById('paymentModal')).show();
             changePage(1);
         });
     </script>
+
 
 
     <!-- FAQ Section -->
