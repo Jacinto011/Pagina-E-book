@@ -262,14 +262,15 @@
     <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <!-- Cabeçalho -->
                 <div class="modal-header">
                     <h5 class="modal-title">Processo de Compra</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
 
-                <!-- Page 1: Personal Data -->
+                <!-- Página 1: Dados Pessoais -->
                 <div class="modal-body page" id="page1">
-                    <form id="paymentForm">
+                    <form id="paymentForm" novalidate>
                         <div class="mb-3">
                             <label for="firstName" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="firstName" required>
@@ -289,7 +290,7 @@
                     </form>
                 </div>
 
-                <!-- Page 2: Questions -->
+                <!-- Página 2: Perguntas -->
                 <div class="modal-body page" id="page2" style="display:none;">
                     <div class="mb-3">
                         <label for="purpose" class="form-label">Para que fim pretende adquirir o livro?</label>
@@ -300,7 +301,6 @@
                             <option value="liberdade">Para alcançar a minha liberdade financeira</option>
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="delivery" class="form-label">Onde pretende receber o ebook?</label>
                         <select class="form-select" id="delivery" required>
@@ -311,76 +311,70 @@
                     </div>
                 </div>
 
-                <!-- Page 3: Wallet Selection -->
+                <!-- Página 3: Escolha da Carteira -->
                 <div class="modal-body page" id="page3" style="display:none;">
                     <h6>Escolha a carteira móvel para pagamento:</h6>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="wallet" id="mkesh" value="mkesh" required>
-                        <label class="form-check-label" for="mkesh">
-                            M-Kesh - <strong>821272085</strong> ( Edwin Avelino)
-                        </label>
+                        <label class="form-check-label" for="mkesh">M-Kesh - <strong>821272085</strong> (Edwin
+                            Avelino)</label>
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="wallet" id="emola" value="emola">
-                        <label class="form-check-label" for="emola">
-                            E-Mola - <strong>863444447</strong> (Edwin Avelino)
-                        </label>
+                        <label class="form-check-label" for="emola">E-Mola - <strong>863444447</strong> (Edwin
+                            Avelino)</label>
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="wallet" id="mpesa" value="mpesa">
-                        <label class="form-check-label" for="mpesa">
-                            M-Pesa - <strong>844117140</strong> (Maria Albertina)
-                        </label>
+                        <label class="form-check-label" for="mpesa">M-Pesa - <strong>844117140</strong> (Maria
+                            Albertina)</label>
                     </div>
                 </div>
 
-                <!-- Page 4: Payment Instructions -->
+                <!-- Página 4: Instruções -->
                 <div class="modal-body page" id="page4" style="display:none;">
                     <h6 class="mb-3">Instruções de Pagamento:</h6>
                     <p>Envie o valor de <strong>99 MZN</strong> para o número abaixo:</p>
                     <p id="walletNumber" class="fw-bold text-primary"></p>
 
-                    <div class="mobile-wallets justify-content-center mt-3 mb-3">
-                        <img id="walletImage" src="" alt="Carteira Móvel Selecionada" style="width: 140px;">
+                    <div class="mobile-wallets mt-3 mb-3">
+                        <img id="walletImage" src="" alt="Carteira Selecionada" style="width: 140px;">
                     </div>
 
                     <ol class="steps-list">
-                        <li>Enviar uma foto com a confirmação do pagamento via WhatsApp para o mesmo número</li>
-                        <li>Você receberá o ebook via email ou WhatsApp, conforme sua escolha</li>
+                        <li>Envie a foto de confirmação do pagamento via WhatsApp para o mesmo número.</li>
+                        <li>Você receberá o ebook conforme a opção escolhida.</li>
                     </ol>
                 </div>
 
-                <!-- Footer -->
+                <!-- Rodapé (botões) -->
                 <div class="modal-footer">
-                    <!-- Page 1 Footer -->
+                    <!-- Página 1 -->
                     <div class="footer-buttons" id="footer1">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="nextPage(1)">Seguinte</button>
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-primary" onclick="nextPage(1)">Seguinte</button>
                     </div>
-
-                    <!-- Page 2 Footer -->
+                    <!-- Página 2 -->
                     <div class="footer-buttons" id="footer2" style="display:none;">
-                        <button type="button" class="btn btn-secondary" onclick="prevPage(2)">Anterior</button>
-                        <button type="button" class="btn btn-primary" onclick="nextPage(2)">Seguinte</button>
+                        <button class="btn btn-secondary" onclick="prevPage(2)">Anterior</button>
+                        <button class="btn btn-primary" onclick="nextPage(2)">Seguinte</button>
                     </div>
-
-                    <!-- Page 3 Footer -->
+                    <!-- Página 3 -->
                     <div class="footer-buttons" id="footer3" style="display:none;">
-                        <button type="button" class="btn btn-secondary" onclick="prevPage(3)">Anterior</button>
-                        <button type="button" class="btn btn-primary" onclick="nextPage(3)">Seguinte</button>
+                        <button class="btn btn-secondary" onclick="prevPage(3)">Anterior</button>
+                        <button class="btn btn-primary" onclick="nextPage(3)">Seguinte</button>
                     </div>
-
-                    <!-- Page 4 Footer -->
+                    <!-- Página 4 -->
                     <div class="footer-buttons" id="footer4" style="display:none;">
-                        <button type="button" class="btn btn-secondary" onclick="prevPage(4)">Anterior</button>
-                        <button type="button" class="btn btn-success" onclick="submitPayment()">Está bem</button>
+                        <button class="btn btn-secondary" onclick="prevPage(4)">Anterior</button>
+                        <button class="btn btn-success" onclick="submitPayment()">Está bem</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Styles -->
+    <!-- Estilos -->
     <style>
         .steps-list {
             padding-left: 20px;
@@ -424,7 +418,6 @@
             .mobile-wallets {
                 flex-direction: column;
                 align-items: center;
-                gap: 10px;
             }
 
             .mobile-wallets img {
@@ -440,22 +433,22 @@
 
         const walletData = {
             mkesh: {
-                number: "Pagemento Seguro: 821272085",
+                number: "Pagamento Seguro: 821272085",
                 image: "imagem/mkesh.jpg"
             },
             emola: {
-                number: "Pagemento Seguro: 863444447",
+                number: "Pagamento Seguro: 863444447",
                 image: "imagem/emola3.png"
             },
             mpesa: {
-                number: "Pagemento Seguro: 844117140",
+                number: "Pagamento Seguro: 844117140",
                 image: "imagem/m-pesa.jpg"
             }
         };
 
         function changePage(newPage) {
-            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
-            document.querySelectorAll('.footer-buttons').forEach(footer => footer.style.display = 'none');
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('.footer-buttons').forEach(f => f.style.display = 'none');
 
             document.getElementById(`page${newPage}`).style.display = 'block';
             document.getElementById(`footer${newPage}`).style.display = 'flex';
@@ -467,22 +460,25 @@
             if (pageNum === 1) {
                 const form = document.getElementById('paymentForm');
                 if (!form.checkValidity()) {
-                    form.classList.add('was-validated');
+                    form.reportValidity();
                     return;
                 }
-            } else if (pageNum === 2) {
+            }
+
+            if (pageNum === 2) {
                 if (!document.getElementById('purpose').value || !document.getElementById('delivery').value) {
-                    alert('Por favor responda a todas as perguntas');
+                    alert('Por favor, responda a todas as perguntas.');
                     return;
                 }
-            } else if (pageNum === 3) {
+            }
+
+            if (pageNum === 3) {
                 const selectedWallet = document.querySelector('input[name="wallet"]:checked');
                 if (!selectedWallet) {
-                    alert('Por favor selecione uma carteira móvel');
+                    alert('Por favor, selecione uma carteira.');
                     return;
                 }
 
-                // Atualiza a página 4 com base na carteira selecionada
                 const walletKey = selectedWallet.value;
                 document.getElementById('walletNumber').innerText = walletData[walletKey].number;
                 document.getElementById('walletImage').src = walletData[walletKey].image;
@@ -495,12 +491,12 @@
             changePage(pageNum - 1);
         }
 
-        function submitPayment() {
+        async function submitPayment() {
             const formData = {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
+                firstName: document.getElementById('firstName').value.trim(),
+                lastName: document.getElementById('lastName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
                 purpose: document.getElementById('purpose').value,
                 delivery: document.getElementById('delivery').value,
                 wallet: document.querySelector('input[name="wallet"]:checked')?.value
@@ -508,24 +504,45 @@
 
             console.log('Form data:', formData);
 
-            var paymentModal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
-            paymentModal.hide();
+            // Aqui você deve colocar a URL da sua API Google Sheets (endpoint do Apps Script, por exemplo)
+            const apiUrl = "https://script.google.com/macros/s/AKfycbyzycNtY7s6vl0OB4c-WAg7rozzL3oKiCUVMQIs1km1GjEJ4xKZxO-Pd11ZscUnNRWb/exec";
 
-            alert('Aguardando pela sua compra! Por favor complete o pagamento seguindo as instruções. Boa Leitura!');
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
 
-            // Reset
-            document.getElementById('paymentForm').reset();
-            document.getElementById('purpose').value = '';
-            document.getElementById('delivery').value = '';
-            document.querySelectorAll('input[name="wallet"]').forEach(input => input.checked = false);
-            changePage(1);
+                if (!response.ok) throw new Error('Erro ao enviar dados.');
+
+                const result = await response.json();
+
+                // Fechar modal após envio
+                bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
+
+                alert('Aguardando pela sua compra! Por favor complete o pagamento seguindo as instruções. Boa leitura!');
+
+                // Resetar formulário e voltar para página 1
+                document.getElementById('paymentForm').reset();
+                document.getElementById('purpose').value = '';
+                document.getElementById('delivery').value = '';
+                document.querySelectorAll('input[name="wallet"]').forEach(w => w.checked = false);
+
+                changePage(1);
+
+            } catch (error) {
+                alert('Erro ao enviar dados. Tente novamente mais tarde.');
+                console.error('Erro:', error);
+            }
         }
 
-        // Abrir modal
+        // Abertura do modal
         document.querySelector('.cta-button')?.addEventListener('click', function (e) {
             e.preventDefault();
-            var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
-            paymentModal.show();
+            new bootstrap.Modal(document.getElementById('paymentModal')).show();
             changePage(1);
         });
     </script>
