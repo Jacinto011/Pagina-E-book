@@ -326,8 +326,8 @@
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="wallet" id="mpesa" value="mpesa">
-                        <label class="form-check-label" for="mpesa">M-Pesa - <strong>844117140</strong> (Maria
-                            Albertina)</label>
+                        <label class="form-check-label" for="mpesa">M-Pesa - <strong>856627849</strong> (Edwin
+                            Avelino)</label>
                     </div>
                 </div>
 
@@ -344,6 +344,7 @@
                     <ol class="steps-list">
                         <li>Envie a foto de confirmação do pagamento via WhatsApp para o mesmo número.</li>
                         <li>Você receberá o ebook conforme a opção escolhida.</li>
+                        <li>Caso não receba o ebook dentro de 10 minutos por favor ligue para o numero 863444447</li>
                     </ol>
                 </div>
 
@@ -367,205 +368,13 @@
                     <!-- Página 4 -->
                     <div class="footer-buttons" id="footer4" style="display:none;">
                         <button class="btn btn-secondary" onclick="prevPage(4)">Anterior</button>
-                        <button class="btn btn-success" onclick="submitPayment()">Está bem</button>
+                        <button id="submitButton" class="btn btn-success" onclick="submitPayment()">Está bem</button>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Estilos -->
-    <style>
-        .steps-list {
-            padding-left: 20px;
-        }
-
-        .steps-list li {
-            margin-bottom: 10px;
-        }
-
-        .modal-content {
-            border-radius: 10px;
-        }
-
-        .modal-header,
-        .modal-footer {
-            border-color: #eee;
-        }
-
-        .modal-footer {
-            justify-content: space-between;
-        }
-
-        .footer-buttons {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .page {
-            min-height: 300px;
-        }
-
-        .mobile-wallets {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 600px) {
-            .mobile-wallets {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .mobile-wallets img {
-                width: 80%;
-                max-width: 200px;
-            }
-        }
-    </style>
-
-    <script>
-        let currentPage = 1;
-
-        const walletData = {
-            mkesh: {
-                number: "Pagamento Seguro: 821272085",
-                image: "imagem/mkesh.jpg"
-            },
-            emola: {
-                number: "Pagamento Seguro: 863444447",
-                image: "imagem/emola3.png"
-            },
-            mpesa: {
-                number: "Pagamento Seguro: 844117140",
-                image: "imagem/m-pesa.jpg"
-            }
-        };
-
-        function changePage(newPage) {
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-            document.querySelectorAll('.footer-buttons').forEach(f => f.style.display = 'none');
-
-            document.getElementById(`page${newPage}`).style.display = 'block';
-            document.getElementById(`footer${newPage}`).style.display = 'flex';
-
-            currentPage = newPage;
-        }
-
-        function nextPage(pageNum) {
-            if (pageNum === 1) {
-                const form = document.getElementById('paymentForm');
-                if (!form.checkValidity()) {
-                    form.reportValidity();
-                    return;
-                }
-            }
-
-            if (pageNum === 2) {
-                if (!document.getElementById('purpose').value || !document.getElementById('delivery').value) {
-                    alert('Por favor, responda a todas as perguntas.');
-                    return;
-                }
-            }
-
-            if (pageNum === 3) {
-                const selectedWallet = document.querySelector('input[name="wallet"]:checked');
-                if (!selectedWallet) {
-                    alert('Por favor, selecione uma carteira.');
-                    return;
-                }
-
-                const walletKey = selectedWallet.value;
-                document.getElementById('walletNumber').innerText = walletData[walletKey].number;
-                document.getElementById('walletImage').src = walletData[walletKey].image;
-            }
-
-            changePage(pageNum + 1);
-        }
-
-        function prevPage(pageNum) {
-            changePage(pageNum - 1);
-        }
-
-        async function submitPayment() {
-            const formData = {
-                firstName: document.getElementById('firstName').value.trim(),
-                lastName: document.getElementById('lastName').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                purpose: document.getElementById('purpose').value,
-                delivery: document.getElementById('delivery').value,
-                wallet: document.querySelector('input[name="wallet"]:checked')?.value
-            };
-
-            console.log('Form data:', formData);
-
-            const apiUrl = "https://script.google.com/macros/s/AKfycbxpTuR4nyAJMBb7OTIQk-PkPCRZhVulbJUwfo5RQ-_wwWdkVNYbHAOKBcCOpqyONV6mVg/exec";
-
-            try {
-                // Use URLSearchParams porque Google Apps Script espera application/x-www-form-urlencoded
-                const urlEncodedData = new URLSearchParams(formData);
-
-                const response = await fetch(apiUrl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: urlEncodedData
-                });
-
-                if (!response.ok) throw new Error('Erro ao enviar dados.');
-
-                const result = await response.json();
-
-                // Fecha modal
-                bootstrap.Modal.getInstance(document.getElementById('paymentModal')).hide();
-
-                alert('Aguardando pela sua compra! Por favor complete o pagamento seguindo as instruções. Boa leitura!');
-
-                // Resetar formulário e voltar à página inicial
-                document.getElementById('paymentForm').reset();
-                document.getElementById('purpose').value = '';
-                document.getElementById('delivery').value = '';
-                document.querySelectorAll('input[name="wallet"]').forEach(w => w.checked = false);
-
-                changePage(1);
-
-            } catch (error) {
-                alert('Erro ao enviar dados. Tente novamente mais tarde.');
-                console.error('Erro:', error);
-            }
-        }
-
-        // NOVO: Chamar dados via GET e exibir no console
-        async function fetchPayments() {
-            const apiUrl = "https://script.google.com/macros/s/AKfycbxpTuR4nyAJMBb7OTIQk-PkPCRZhVulbJUwfo5RQ-_wwWdkVNYbHAOKBcCOpqyONV6mVg/exec";
-
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                console.log("Pagamentos recebidos:", data);
-            } catch (error) {
-                console.error("Erro ao buscar dados:", error);
-            }
-        }
-
-        // Exemplo: Chamar os dados assim que a página carregar
-        document.addEventListener("DOMContentLoaded", fetchPayments);
-
-        // Abrir modal
-        document.querySelector('.cta-button')?.addEventListener('click', function (e) {
-            e.preventDefault();
-            new bootstrap.Modal(document.getElementById('paymentModal')).show();
-            changePage(1);
-        });
-    </script>
-
-
 
     <!-- FAQ Section -->
     <section class="py-5 bg-light">
@@ -583,7 +392,7 @@
                             </h3>
                             <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Imediatamente após a confirmação do pagamento, você receberá o ebook em formato PDF
+                                    Após a confirmação do pagamento, você receberá o ebook em formato PDF
                                     no seu email ou no seu whatsapp dependendo de como escolheste receber o ebook. O
                                     arquivo é compatível com smartphones,
                                     tablets e computadores.
