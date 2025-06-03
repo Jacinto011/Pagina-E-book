@@ -41,10 +41,6 @@ document.querySelectorAll('.price-box').forEach(box => {
 let currentPage = 1;
 
 const walletData = {
-    mkesh: {
-        number: "Pagamento Seguro: 821272085",
-        image: "imagem/mkesh.jpg"
-    },
     emola: {
         number: "Pagamento Seguro: 863444447",
         image: "imagem/emola3.png"
