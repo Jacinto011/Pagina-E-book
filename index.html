@@ -260,119 +260,120 @@
             </div>
         </div>
     </section>
-    <!-- Modal Structure -->
-    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <!-- Cabeçalho -->
-                <div class="modal-header">
-                    <h5 class="modal-title">Processo de Compra</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
 
-                <!-- Página 1: Dados Pessoais -->
-                <div class="modal-body page" id="page1">
-                    <form id="paymentForm" novalidate>
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="firstName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label">Apelido</label>
-                            <input type="text" class="form-control" id="lastName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Contacto</label>
-                            <input type="tel" class="form-control" id="phone" required>
-                        </div>
-                    </form>
-                </div>
+<!-- Modal Structure -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Cabeçalho -->
+            <div class="modal-header">
+                <h5 class="modal-title">Processo de Compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
 
-                <!-- Página 2: Perguntas -->
-                <div class="modal-body page" id="page2" style="display:none;">
+            <!-- Página 1: Dados Pessoais -->
+            <div class="modal-body page" id="page1">
+                <form id="paymentForm" novalidate>
                     <div class="mb-3">
-                        <label for="purpose" class="form-label">Para que fim pretende adquirir o livro?</label>
-                        <select class="form-select" id="purpose" required>
-                            <option value="" selected disabled>Selecione uma opção</option>
-                            <option value="leitura">Somente para leitura</option>
-                            <option value="tecnicas">Para aprimorar minhas técnicas de venda</option>
-                            <option value="liberdade">Para alcançar a minha liberdade financeira</option>
-                        </select>
+                        <label for="firstName" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="firstName" required>
                     </div>
                     <div class="mb-3">
-                        <label for="delivery" class="form-label">Onde pretende receber o ebook?</label>
-                        <select class="form-select" id="delivery" required>
-                            <option value="" selected disabled>Selecione uma opção</option>
-                            <option value="whatsapp">WhatsApp</option>
-                            <option value="email">Email</option>
-                        </select>
+                        <label for="lastName" class="form-label">Apelido</label>
+                        <input type="text" class="form-control" id="lastName" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Contacto</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Página 2: Perguntas -->
+            <div class="modal-body page" id="page2" style="display:none;">
+                <div class="mb-3">
+                    <label for="purpose" class="form-label">Para que fim pretende adquirir o livro?</label>
+                    <select class="form-select" id="purpose" required>
+                        <option value="" selected disabled>Selecione uma opção</option>
+                        <option value="leitura">Somente para leitura</option>
+                        <option value="tecnicas">Para aprimorar minhas técnicas de venda</option>
+                        <option value="liberdade">Para alcançar a minha liberdade financeira</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="delivery" class="form-label">Onde pretende receber o ebook?</label>
+                    <select class="form-select" id="delivery" required>
+                        <option value="" selected disabled>Selecione uma opção</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="email">Email</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Página 3: Escolha da Carteira -->
+            <div class="modal-body page" id="page3" style="display:none;">
+                <h6>Escolha a carteira móvel para pagamento:</h6>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="wallet" id="emola" value="emola">
+                    <label class="form-check-label" for="emola">E-Mola - <strong>863444447</strong> (Edwin
+                        Avelino)</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="wallet" id="mpesa" value="mpesa">
+                    <label class="form-check-label" for="mpesa">M-Pesa - <strong>856627849</strong> (Edwin
+                        Avelino)</label>
+                </div>
+            </div>
+
+            <!-- Página 4: Instruções -->
+            <div class="modal-body page" id="page4" style="display:none;">
+                <h6 class="mb-3">Instruções de Pagamento:</h6>
+                <p>Envie o valor de <strong>99 MZN</strong> para o número abaixo:</p>
+                <p id="walletNumber" class="fw-bold text-primary"></p>
+
+                <div class="mobile-wallets mt-3 mb-3">
+                    <img id="walletImage" src="" alt="ebook grátis em Moçambique, livro digital para estudantes, ebook 2025 nhonga, baixar ebook educativo" style="width: 140px;">
                 </div>
 
-                <!-- Página 3: Escolha da Carteira -->
-                <div class="modal-body page" id="page3" style="display:none;">
-                    <h6>Escolha a carteira móvel para pagamento:</h6>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="wallet" id="emola" value="emola">
-                        <label class="form-check-label" for="emola">E-Mola - <strong>863444447</strong> (Edwin
-                            Avelino)</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="wallet" id="mpesa" value="mpesa">
-                        <label class="form-check-label" for="mpesa">M-Pesa - <strong>856627849</strong> (Edwin
-                            Avelino)</label>
-                    </div>
+                <ol class="steps-list">
+                    <li>Envie a foto de confirmação do pagamento via WhatsApp para o mesmo número.</li>
+                    <li>Você receberá o ebook conforme a opção escolhida.</li>
+                    <li>Caso não receba o ebook dentro de 10 minutos por favor ligue para o numero 863444447</li>
+                </ol>
+            </div>
+
+            <!-- Rodapé (botões) -->
+            <div class="modal-footer">
+                <!-- Página 1 -->
+                <div class="footer-buttons" id="footer1">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary" onclick="nextPage(1)">Seguinte</button>
                 </div>
-
-                <!-- Página 4: Instruções -->
-                <div class="modal-body page" id="page4" style="display:none;">
-                    <h6 class="mb-3">Instruções de Pagamento:</h6>
-                    <p>Envie o valor de <strong>99 MZN</strong> para o número abaixo:</p>
-                    <p id="walletNumber" class="fw-bold text-primary"></p>
-
-                    <div class="mobile-wallets mt-3 mb-3">
-                        <img id="walletImage" src="" alt="ebook grátis em Moçambique, livro digital para estudantes, ebook 2025 nhonga, baixar ebook educativo" style="width: 140px;">
-                    </div>
-
-                    <ol class="steps-list">
-                        <li>Envie a foto de confirmação do pagamento via WhatsApp para o mesmo número.</li>
-                        <li>Você receberá o ebook conforme a opção escolhida.</li>
-                        <li>Caso não receba o ebook dentro de 10 minutos por favor ligue para o numero 863444447</li>
-                    </ol>
+                <!-- Página 2 -->
+                <div class="footer-buttons" id="footer2" style="display:none;">
+                    <button class="btn btn-secondary" onclick="prevPage(2)">Anterior</button>
+                    <button class="btn btn-primary" onclick="nextPage(2)">Seguinte</button>
                 </div>
-
-                <!-- Rodapé (botões) -->
-                <div class="modal-footer">
-                    <!-- Página 1 -->
-                    <div class="footer-buttons" id="footer1">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary" onclick="nextPage(1)">Seguinte</button>
-                    </div>
-                    <!-- Página 2 -->
-                    <div class="footer-buttons" id="footer2" style="display:none;">
-                        <button class="btn btn-secondary" onclick="prevPage(2)">Anterior</button>
-                        <button class="btn btn-primary" onclick="nextPage(2)">Seguinte</button>
-                    </div>
-                    <!-- Página 3 -->
-                    <div class="footer-buttons" id="footer3" style="display:none;">
-                        <button class="btn btn-secondary" onclick="prevPage(3)">Anterior</button>
-                        <button class="btn btn-primary" onclick="nextPage(3)">Seguinte</button>
-                    </div>
-                    <!-- Página 4 -->
-                    <div class="footer-buttons" id="footer4" style="display:none;">
-                        <button class="btn btn-secondary" onclick="prevPage(4)">Anterior</button>
-                        <button id="submitButton" class="btn btn-success" onclick="submitPayment()">Está bem</button>
-
-                    </div>
+                <!-- Página 3 -->
+                <div class="footer-buttons" id="footer3" style="display:none;">
+                    <button class="btn btn-secondary" onclick="prevPage(3)">Anterior</button>
+                    <button class="btn btn-primary" onclick="nextPage(3)">Seguinte</button>
+                </div>
+                <!-- Página 4 -->
+                <div class="footer-buttons" id="footer4" style="display:none;">
+                    <button class="btn btn-secondary" onclick="prevPage(4)">Anterior</button>
+                    <button id="submitButton" class="btn btn-success" onclick="redirectToWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Enviar Comprovante
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
     <!-- FAQ Section -->
     <section class="py-5 bg-light">
         <div class="container py-5">

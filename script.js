@@ -173,3 +173,10 @@ document.querySelector('.cta-button')?.addEventListener('click', function (e) {
     new bootstrap.Modal(document.getElementById('paymentModal')).show();
     changePage(1);
 });
+
+function redirectToWhatsApp() {
+    const phoneNumber = "+258863444447";
+    const message = "Olá, já fiz o pagamento e em anexo está o comprovante";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
